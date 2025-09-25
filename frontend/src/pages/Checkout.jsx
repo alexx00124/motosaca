@@ -171,21 +171,6 @@ const Checkout = () => {
           </div>
         )}
 
-        {/* Debug info - solo para desarrollo */}
-        <div style={{ 
-          marginBottom: '1rem', 
-          padding: '1rem', 
-          background: 'rgba(255, 255, 0, 0.1)', 
-          borderRadius: '5px',
-          fontSize: '0.8rem',
-          color: '#666'
-        }}>
-          <strong>Debug Info:</strong><br/>
-          Usuario: {user ? `ID: ${user.user_id}, Nombre: ${user.name}` : 'No encontrado'}<br/>
-          Carrito: {cart.length} items<br/>
-          Backend URL: http://localhost:3000/api/sales
-        </div>
-
         {cart.length === 0 ? (
           <div style={{ 
             textAlign: 'center', 

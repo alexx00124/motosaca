@@ -154,7 +154,7 @@ const Catalog = () => {
       ) : !loading && !error && (
         <div style={{ 
           textAlign: 'center', 
-          color: 'white', 
+          color: 'black', 
           padding: '3rem',
           background: 'rgba(255,255,255,0.1)',
           backdropFilter: 'blur(10px)',

@@ -5,24 +5,32 @@ const User = require('../models/User');
 // Crear nueva venta
 const createSale = async (req, res) => {
   try {
+    console.log('=== INICIANDO VENTA ===');
+    console.log('Body recibido:', req.body);
+    
     const { user_id, products } = req.body;
 
     // Verificar que el usuario existe
     const user = await User.findById(user_id);
     if (!user) {
+      console.log('❌ Usuario no encontrado:', user_id);
       return res.status(404).json({
         success: false,
         message: 'Usuario no encontrado'
       });
     }
+    console.log('✅ Usuario encontrado:', user.name);
 
     // Obtener IDs únicos de productos
     const productIds = [...new Set(products.map(p => p.id))];
+    console.log('🔍 Buscando productos:', productIds);
     
     // Verificar que todos los productos existen en el catálogo
     const catalogProducts = await Catalog.findByIds(productIds);
+    console.log('📦 Productos encontrados:', catalogProducts.length);
     
     if (catalogProducts.length !== productIds.length) {
+      console.log('❌ No todos los productos existen');
       return res.status(404).json({
         success: false,
         message: 'Uno o más productos no existen en el catálogo'
@@ -55,9 +63,11 @@ const createSale = async (req, res) => {
 
     // Redondear a 2 decimales
     total_price = Math.round(total_price * 100) / 100;
+    console.log('💰 Total calculado:', total_price);
 
     // Crear la venta en la base de datos
     const newSale = await Sale.create(user_id, total_price);
+    console.log('✅ Venta creada:', newSale);
 
     res.status(201).json({
       success: true,
@@ -71,10 +81,11 @@ const createSale = async (req, res) => {
     });
 
   } catch (error) {
-    console.error('Error en createSale:', error);
+    console.error('💥 ERROR COMPLETO en createSale:', error);
+    console.error('Stack trace:', error.stack);
     res.status(500).json({
       success: false,
-      message: 'Error interno del servidor'
+      message: 'Error interno del servidor: ' + error.message
     });
   }
 };
