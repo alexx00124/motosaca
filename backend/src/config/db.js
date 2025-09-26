@@ -22,7 +22,7 @@ const insertMotosIfEmpty = () => {
     }
 
     if (!row || row.count === 0) {
-      console.log('🏍️ Insertando motos reales en el catálogo...');
+      console.log('Insertando motos reales en el catálogo...');
       
       const motos = [
         ['Royal Enfield Classic 350', 16500000, 'Moto clásica vintage con motor 349cc, llantas nuevas, defensa de motor incluida. Revisión técnico-mecánica al día.', 'https://royalenfieldco.com/wp-content/uploads/2024/10/banner_latetal_green_classic_350.webp'],
